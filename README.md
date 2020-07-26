@@ -34,6 +34,8 @@ The product plays excerpts of designated local videos of which the dialogue cont
    --[file]The last video file.mp4
    ```
 
+   In some way, the 2 folders are isomorphic, and the corresponding files will be matched.  
+
 4. Write the install path of *PotPlayer*, path of subtitle folder and path of video folder in the proper place in `Main.cpp`.  
 
 ## How to use
