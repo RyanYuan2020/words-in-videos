@@ -5,7 +5,7 @@ Author - *Ryan Yuan*
 ## Intro
 
 A helper for English learner.  
-The product plays excerpts of designated local videos of which the dialogue contains the given word, hence helps user to have a better grasp of the word.  The re-play of the excerpt helps users to connect the plot of movie, series with the unfamiliar word.  The simultaneous stimulation of **vision**, **audition** as well as **the memories for the polt**, makes it easy to remember and grip a word.  
+The product plays excerpts of designated local videos of which the dialogue contains the given word, hence helps user to have a better grasp of the word.  The re-play of the excerpt helps users to connect the plot of movie, series with the unfamiliar word.  The simultaneous stimulation of **vision**, **audition** as well as **the memories for the polt**, makes it easier to remember and grip a word.  
 
 ## Preparation
 
