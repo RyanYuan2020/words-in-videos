@@ -25,11 +25,10 @@ void ryl::FileCrawler::crawler(const rel_path_vec & relativePath, const vector<s
 			fstream fs(str_root_of_subtitle_files + relativePath.toString());
 			subtitle st(fs, path_path.extension().string());
 			episodes.emplace_back(st, relativePath, numericRelativePathVector, getVideoPath(numericRelativePathVector));
-			if (_DEBUG_)
-			{
-				cout << "File " << relativePath.toString() << " has been successfully parsed. \n" << st.size() << " entries in total\n"
-					<< "The subtitle file is linked with " << episodes[episodes.size() - 1].relativePathOfVideo << "\n\n";
-			}
+#ifdef DEBUG
+			cout << "File " << relativePath.toString() << " has been successfully parsed. \n" << st.size() << " entries in total\n"
+				<< "The subtitle file is linked with " << episodes[episodes.size() - 1].relativePathOfVideo << "\n\n";
+#endif // DEBUG
 		}
 		else
 			throw UnexpectedFileType();

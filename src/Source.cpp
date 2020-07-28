@@ -12,8 +12,6 @@
 using namespace std;
 using namespace ryl;
 
-bool _DEBUG_ = false;
-
 int main()
 {
 	string subtitleroot("E:\\Words in Videos\\Subtitle"),
@@ -21,28 +19,29 @@ int main()
 
 	FileCrawler fc(subtitleroot, videoroot);
 
-	//
 	extern map<string, set<string>> inflected_forms;
 
-	if(_DEBUG_)
-	{
-		cout << inflected_forms.size() << "\n";
+#ifdef DEBUG
+	cout << inflected_forms.size() << "\n";
 
-		for (auto & iform : inflected_forms)
-		{
-			cout << iform.second.size();
-		}
-	}
-
-	if (_DEBUG_)
+	for (auto & iform : inflected_forms)
 	{
-		cout << fc.episodes.size() << " files in total\n\n\n";
+		cout << iform.second.size();
 	}
+	cout << fc.episodes.size() << " files in total\n\n\n";
+#endif // DEBUG
+
+	string des;
+
+	cout << fc.episodes.size() << " files of subtitle have been scanned succefully.  \n"
+		"Type a word to start exploration\n\n";
 
 	while (true)
 	{
-		string des;
 		cin >> des;
+
+	gotoTag_startNewWord:
+
 		cout << "\n";
 		size_t i = 0;
 		vector<pair<rel_path_vec, entry>> finalRes;
@@ -51,10 +50,10 @@ int main()
 			auto res = epi.subtitleOfEpisode.find_all(des);
 			if (res.size())
 			{
-				cout << epi.relativePathOfVideo << ": \n";
+				cout << epi.relativePathOfVideo << ": \n\n";
 				for (auto & resPair : res)
 				{
-					cout << i << "  " << epi.subtitleOfEpisode[resPair.first].txt << "\n\n";
+					cout << i << ": \n" << epi.subtitleOfEpisode[resPair.first].txt << "\n\n";
 					finalRes.push_back({ epi.relativePathOfVideo,epi.subtitleOfEpisode[resPair.first] });
 					i++;
 				}
@@ -63,28 +62,39 @@ int main()
 
 		if (finalRes.size() == 0)
 		{
-			cout << "Not found\n\n";
+			cout << "Not found\n\nPlease start a new word\n\n";
 			continue;
 		}
+		cout << "Input the number before the entry to watch the excerpt.  \n"
+			"Type a new word to start another search\n\n\n";
 
 		while (true)
 		{
-			size_t in;
-			cin >> in;
-			if (in < finalRes.size())
+			long long in;
+			string raw_input;
+			cin >> raw_input;
+			try
+			{
+				in = stoll(raw_input);
+			}
+			catch (invalid_argument ia)
+			{
+				des = raw_input;
+				goto gotoTag_startNewWord;
+			}
+			if (in < finalRes.size() and in >= 0)
 			{
 				string cmd(R"(cd C:\Program Files (x86)\DAUM\PotPlayer)" +
 						   string("&&") +
 						   R"(PotPlayerMini.exe )" + "\"" + videoroot + finalRes[in].first.toString() + "\" " + "/seek=" + finalRes[in].second.dur.begin);
-				if (_DEBUG_)
-				{
-					cout << cmd << "\n\n";
-				}
+#ifdef DEBUG
+				cout << cmd << "\n\n";
+#endif // DEBUG
 				system(cmd.c_str());
 			}
 			else
 			{
-				cout << "\n\n";
+				cout << "\nInvalid index, choose another one\n\n\n";
 				break;
 			}
 		}
