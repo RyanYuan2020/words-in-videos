@@ -40,7 +40,7 @@ The product plays excerpts of designated local videos of which the dialogue cont
 
 ## How to use
 
-Input the unfamiliar word encountered, the program will offer several entries of dialogue that contains the given word.  Input the number at the beginning of each entry, the *PotPlayer* would be invoked to play the designated excerpt.  To start another word, input any number that is larger than the index of the last entry.  
+Input the unfamiliar word encountered, the program will offer several entries of dialogue that contains the given word.  Input the number at the beginning of each entry, the *PotPlayer* would be invoked to play the designated excerpt.  To start another word, just type it and press `Enter`.  
 
 ## Features
 
