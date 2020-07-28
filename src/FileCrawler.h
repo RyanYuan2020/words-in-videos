@@ -11,8 +11,6 @@
 #include"subtitle.h"
 #include"path_vec.h"
 
-extern bool _DEBUG_;
-
 namespace ryl
 {
 	using namespace std;

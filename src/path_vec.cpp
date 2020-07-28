@@ -3,7 +3,11 @@
 
 std::ostream & ryl::operator<<(ostream & os, const rel_path_vec & rpv)
 {
-	return os << rpv.toString();
+	for (auto & relFileName : rpv)
+	{
+		os << relFileName << ' ';
+	}
+	return os;
 }
 
 ryl::rel_path_vec::rel_path_vec(const string & path)

@@ -119,7 +119,7 @@ size_t ryl::subtitle::find_in_entry(const string & des, size_t idx, bool isWord,
 	string des_str(des);
 	if (isWord)
 	{
-		if(inflected_forms.find(des)!=inflected_forms.end())
+		if (inflected_forms.find(des) != inflected_forms.end())
 		{
 			for (auto & inflected_form : inflected_forms[des])
 			{
