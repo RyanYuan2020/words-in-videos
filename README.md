@@ -13,18 +13,18 @@ The product plays excerpts of designated local videos of which the dialogue cont
   *The link may be unavailable for Chinese users*
 2. Create 2 **different** folders for your subtitle files and videos files **respectively**, aka the root folders.  
 3. Duplicate/move your subtitle files & videos files to the folders you created at step 2.  
-   It is noteworthy that, the folders will be lexicographically ordered, and the corresponding subtitle file and video file should be in **"the same relative folders"** to their root folders.  
+   It is noteworthy that, when lexicographically ordered, the corresponding subtitle file and video file should be at **"the same rank"**, and the folders containing the corresponding files should be at **the same rank**.  
    For example, in my subtitle folder, it looks like this when lexicographically ordered:  
   
    ```c
    [directory]subtitle
    --[file]a subtitle file0.srt
    --[directory]sub_folder_A
-     --subtitle file1.ass
+     --[file]subtitle file1.ass
    --[file]The last subtitle file.srt
    ```
   
-   Correspondingly, my video file should looks like:  
+   Correspondingly, my video folder should look like:  
   
    ```c
    [directory]video
@@ -47,3 +47,5 @@ Input the unfamiliar word encountered, the program will offer several entries of
 1. The creative way of matching subtitle and video files exempts users of tedious work of file labelling.  
 
 2. The program is able to parse subtitle files with both extensions `.srt` and `.ass`.  
+
+3. When searching for a word,  all the inflected forms of the word would be match.  For example, when searching for 'take', entries containing 'takes', 'taking', 'took', 'taken' will be presented as well.  
