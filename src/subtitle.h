@@ -10,6 +10,7 @@
 #include<fstream>
 #include<iostream>
 #include<regex>
+#include<sstream>
 
 using namespace std;
 
@@ -28,6 +29,7 @@ namespace ryl
 	class subtitle : public vector<entry>
 	{
 		fstream & src;
+
 		const string durationDelimiter = " --> ";
 
 		istream & getvalidline(istream & io, string & des);
@@ -57,6 +59,7 @@ namespace ryl
 		vector<pair<size_t, size_t>> find_all(const string & des, bool isWord = true, bool caseSens = false, size_t pos = 0);
 	};
 	const set<string> subtitle_extensions{ string(".srt"),string(".ass") };
+	const string inflected_form_data_path(R"(..\data\inflected_forms)");
 }
 
 #endif // !SUBTITLE

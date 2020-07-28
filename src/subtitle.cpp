@@ -111,10 +111,28 @@ string ryl::subtitle::makePlainTxt(const string & src)
 	return res;
 }
 
+map<string, set<string>> inflected_forms;
+
 size_t ryl::subtitle::find_in_entry(const string & des, size_t idx, bool isWord, bool caseSens)
 {
 	const string & src_str = (*this)[idx].txt;
-	string pattern = isWord ? ("\\b" + des + "\\b") : des;
+	string des_str(des);
+	if (isWord)
+	{
+		if(inflected_forms.find(des)!=inflected_forms.end())
+		{
+			for (auto & inflected_form : inflected_forms[des])
+			{
+				des_str += "|" + inflected_form;
+			}
+			des_str = "\\b(" + des_str + ")\\b";
+		}
+		else
+		{
+			des_str = "\\b" + des_str + "\\b";
+		}
+	}
+	string pattern = des_str;
 	regex r;
 	smatch res;
 	if (caseSens)
@@ -130,6 +148,19 @@ size_t ryl::subtitle::find_in_entry(const string & des, size_t idx, bool isWord,
 ryl::subtitle::subtitle(fstream & src, const string & extension) :
 	src(src)
 {
+	if (inflected_forms.size() == 0)
+	{
+		ifstream in_inflected_forms(inflected_form_data_path, ios_base::in);
+		string line;
+		while (getline(in_inflected_forms, line))
+		{
+			stringstream line_stream(line);
+			string word, baseWord;
+			line_stream >> baseWord;
+			while (line_stream >> word)
+				inflected_forms[baseWord].insert(word);
+		}
+	}
 	if (extension == ".srt")
 		srt_parser();
 	else if (extension == ".ass")
